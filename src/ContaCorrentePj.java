@@ -3,6 +3,7 @@ import java.time.LocalDate;
 
 public class ContaCorrentePj extends Conta {
 
+    ClientePessoaJuridica cliente;
     private BigDecimal porcentagemTaxaMovimentacao = new BigDecimal(0.05)
             .setScale(2);
 
@@ -21,26 +22,26 @@ public class ContaCorrentePj extends Conta {
     }
 
     @Override
-    public void Sacar(BigDecimal valorSaque) {
+    public void sacar(BigDecimal valorSaque) {
 
         if (valorSaque.compareTo(new BigDecimal(0)) != -1)
-            valorSaque.add(CalculoTaxaMovimentacao(valorSaque));
+            valorSaque = valorSaque.add(CalculoTaxaMovimentacao(valorSaque)).setScale(2);
 
-        if (this.saldo.compareTo(valorSaque) != -1
+        if (super.saldo.compareTo(valorSaque) != -1
                 && valorSaque.compareTo(new BigDecimal(0)) != -1)
-            this.saldo.subtract(valorSaque);
+            super.saldo = super.saldo.subtract(valorSaque).setScale(2);
     }
 
     @Override
-    public void Transferir(Conta contaDestino, BigDecimal valorTransferencia) {
+    public void transferir(Conta contaDestino, BigDecimal valorTransferencia) {
 
         if (valorTransferencia.compareTo(new BigDecimal(0)) != -1)
-            valorTransferencia.add(CalculoTaxaMovimentacao(valorTransferencia));
+            valorTransferencia = valorTransferencia.add(CalculoTaxaMovimentacao(valorTransferencia)).setScale(2);
 
-        if (this.saldo.compareTo(valorTransferencia) != -1
+        if (super.saldo.compareTo(valorTransferencia) != -1
                 && valorTransferencia.compareTo(new BigDecimal(0)) != -1) {
-            this.saldo.subtract(valorTransferencia);
-            contaDestino.Depositar(valorTransferencia);
+            super.saldo = super.saldo.subtract(valorTransferencia).setScale(2);
+            contaDestino.depositar(valorTransferencia);
         }
     }
 

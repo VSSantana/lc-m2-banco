@@ -16,7 +16,7 @@ public abstract class Conta implements OperacoesMovimentacacao {
         this.numeroAgencia = numeroAgencia;
         this.dataAbertura = dataAbertura;
         this.estaAtiva = true;
-        this.saldo = new BigDecimal(0);
+        this.saldo = new BigDecimal(0).setScale(2);
     }
 
     public Integer getNumeroConta() {
@@ -60,28 +60,28 @@ public abstract class Conta implements OperacoesMovimentacacao {
     }
 
     public BigDecimal consultarSaldo() {
-        return this.saldo;
+        return this.saldo.setScale(2);
     }
 
     @Override
-    public void Sacar(BigDecimal valorSaque) {
+    public void sacar(BigDecimal valorSaque) {
         if (this.saldo.compareTo(valorSaque) != -1
                 && valorSaque.compareTo(new BigDecimal(0)) != -1)
-            this.saldo.subtract(valorSaque);
+            this.saldo = this.saldo.subtract(valorSaque).setScale(2);
     }
 
     @Override
-    public void Depositar(BigDecimal valorDeposito) {
+    public void depositar(BigDecimal valorDeposito) {
         if (valorDeposito.compareTo(new BigDecimal(0)) != -1)
-            this.saldo.add(valorDeposito);
+            this.saldo = this.saldo.add(valorDeposito).setScale(2);
     }
 
     @Override
-    public void Transferir(Conta contaDestino, BigDecimal valorTransferencia) {
+    public void transferir(Conta contaDestino, BigDecimal valorTransferencia) {
         if (this.saldo.compareTo(valorTransferencia) != -1
                 && valorTransferencia.compareTo(new BigDecimal(0)) != -1) {
-            this.saldo.subtract(valorTransferencia);
-            contaDestino.Depositar(valorTransferencia);
+            this.saldo = this.saldo.subtract(valorTransferencia).setScale(2);
+            contaDestino.depositar(valorTransferencia);
         }
     }
 
