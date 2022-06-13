@@ -25,15 +25,12 @@ O projeto pode ser entregue via arquivo zip para o e-mail do professor ou via li
 
 ## Métodos
 
-* Saque
-* Transferência
 * Abrir conta 
 * Sacar 
 * Depositar 
 * Transferência  
 * Investir 
-* Consultar 
-* Saldo
+* Consultar saldo
 
 
 # Regras de negócio
