@@ -1,26 +1,31 @@
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public class ClientePessoaJuridica extends Cliente {
 
-    private ContaCorrente contaCorrente;
-    private ContaInvestimento contaInvestimento;
+    private String cnpj;
+    private BigDecimal faturamentoMensal;
 
-    public ClientePessoaJuridica(String nome, LocalDate dataNascimento,
-            String cpf, String rg, String ufRg, BigDecimal renda) {
-        super(nome, dataNascimento, cpf, rg, ufRg, renda);
+    public ClientePessoaJuridica(String nome, String cnpj,
+            BigDecimal faturamentoMensal) {
+        super.setNome(nome);
+        this.cnpj = cnpj;
+        this.faturamentoMensal = faturamentoMensal;
     }
 
-    public void AbrirContaCorrente(Integer numeroConta, Integer numeroAgencia,
-            LocalDate dataAbertura) {
-        this.contaCorrente = new ContaCorrente(numeroConta, numeroAgencia,
-                dataAbertura);
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public void AbrirContaInvestimento(Integer numeroConta,
-            Integer numeroAgencia, LocalDate dataAbertura) {
-        this.contaInvestimento = new ContaInvestimento(numeroConta,
-                numeroAgencia, dataAbertura);
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public BigDecimal getFaturamentoMensal() {
+        return faturamentoMensal;
+    }
+
+    public void setFaturamentoMensal(BigDecimal faturamentoMensal) {
+        this.faturamentoMensal = faturamentoMensal;
     }
 
 }

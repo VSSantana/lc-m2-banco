@@ -1,10 +1,10 @@
 import java.time.LocalDate;
 
-public class ContaPoupanca extends Conta {
+public class ContaCorrentePf extends Conta {
 
-    public ContaPoupanca(Integer numeroConta, Integer numeroAgencia,
+    public ContaCorrentePf(Integer numeroConta, Integer numeroAgencia,
             LocalDate dataAbertura) {
         super(numeroConta, numeroAgencia, dataAbertura);
     }
-    
+
 }
