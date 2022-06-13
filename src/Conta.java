@@ -1,20 +1,22 @@
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public abstract class Conta {
+public abstract class Conta implements OperacoesMovimentacacao {
 
     private Integer numeroConta;
     private Integer numeroAgencia;
     private LocalDate dataAbertura;
     private LocalDate dataEncerramento;
     private boolean estaAtiva;
-    private BigDecimal saldo;
+    protected BigDecimal saldo;
 
     public Conta(Integer numeroConta, Integer numeroAgencia,
             LocalDate dataAbertura) {
         this.numeroConta = numeroConta;
         this.numeroAgencia = numeroAgencia;
         this.dataAbertura = dataAbertura;
+        this.estaAtiva = true;
+        this.saldo = new BigDecimal(0);
     }
 
     public Integer getNumeroConta() {
@@ -59,6 +61,28 @@ public abstract class Conta {
 
     public BigDecimal consultarSaldo() {
         return this.saldo;
+    }
+
+    @Override
+    public void Sacar(BigDecimal valorSaque) {
+        if (this.saldo.compareTo(valorSaque) != -1
+                && valorSaque.compareTo(new BigDecimal(0)) != -1)
+            this.saldo.subtract(valorSaque);
+    }
+
+    @Override
+    public void Depositar(BigDecimal valorDeposito) {
+        if (valorDeposito.compareTo(new BigDecimal(0)) != -1)
+            this.saldo.add(valorDeposito);
+    }
+
+    @Override
+    public void Transferir(Conta contaDestino, BigDecimal valorTransferencia) {
+        if (this.saldo.compareTo(valorTransferencia) != -1
+                && valorTransferencia.compareTo(new BigDecimal(0)) != -1) {
+            this.saldo.subtract(valorTransferencia);
+            contaDestino.Depositar(valorTransferencia);
+        }
     }
 
 }
