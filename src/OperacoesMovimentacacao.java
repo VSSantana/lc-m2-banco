@@ -2,10 +2,10 @@ import java.math.BigDecimal;
 
 public interface OperacoesMovimentacacao {
 
-    void Sacar(BigDecimal valorSaque);
+    void sacar(BigDecimal valorSaque);
 
-    void Depositar(BigDecimal valorSaque);
+    void depositar(BigDecimal valorSaque);
 
-    void Transferir(Conta contaDestino, BigDecimal valorSaque);
+    void transferir(Conta contaDestino, BigDecimal valorSaque);
 
 }
