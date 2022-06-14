@@ -27,4 +27,10 @@ public class ClientePessoaFisica extends Cliente {
         this.renda = renda;
     }
 
+    @Override
+    public String toString() {
+        return "ClientePessoaFisica [nome=" + super.getNome() + ", cpf=" + cpf
+                + ", renda=" + renda + "]";
+    }
+
 }
