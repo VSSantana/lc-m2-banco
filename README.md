@@ -10,7 +10,10 @@ O projeto pode ser entregue via arquivo zip para o e-mail do professor ou via li
 
 ## Classes
 
-- Banco
+- Banco:
+
+  - Coleção de clientes
+  - Coleção de contas
 
 - Clientes:
 
@@ -31,6 +34,8 @@ O projeto pode ser entregue via arquivo zip para o e-mail do professor ou via li
 - Transferência
 - Investir
 - Consultar saldo
+
+- Encerrar conta: TO DO
 
 # Regras de negócio
 

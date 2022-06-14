@@ -1,5 +1,4 @@
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public class ContaCorrentePj extends Conta {
 
@@ -7,9 +6,9 @@ public class ContaCorrentePj extends Conta {
     private BigDecimal porcentagemTaxaMovimentacao = new BigDecimal(0.05)
             .setScale(2);
 
-    public ContaCorrentePj(Integer numeroConta, Integer numeroAgencia,
-            LocalDate dataAbertura) {
-        super(numeroConta, numeroAgencia, dataAbertura);
+    public ContaCorrentePj(Integer numeroConta, Integer numeroAgencia, ClientePessoaJuridica cliente) {
+        super(numeroConta, numeroAgencia);
+        this.cliente = cliente;
     }
 
     private BigDecimal CalculoTaxaMovimentacao(BigDecimal valor) {

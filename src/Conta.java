@@ -10,11 +10,10 @@ public abstract class Conta implements OperacoesMovimentacacao {
     private boolean estaAtiva;
     protected BigDecimal saldo;
 
-    public Conta(Integer numeroConta, Integer numeroAgencia,
-            LocalDate dataAbertura) {
+    public Conta(Integer numeroConta, Integer numeroAgencia) {
         this.numeroConta = numeroConta;
         this.numeroAgencia = numeroAgencia;
-        this.dataAbertura = dataAbertura;
+        this.dataAbertura = LocalDate.now();
         this.estaAtiva = true;
         this.saldo = new BigDecimal(0).setScale(2);
     }

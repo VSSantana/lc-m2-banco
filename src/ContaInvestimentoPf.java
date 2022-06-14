@@ -1,13 +1,12 @@
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public class ContaInvestimentoPf extends Conta implements OperacaoInvestimento {
 
     ClientePessoaFisica cliente;
 
-    public ContaInvestimentoPf(Integer numeroConta, Integer numeroAgencia,
-            LocalDate dataAbertura) {
-        super(numeroConta, numeroAgencia, dataAbertura);
+    public ContaInvestimentoPf(Integer numeroConta, Integer numeroAgencia, ClientePessoaFisica cliente) {
+        super(numeroConta, numeroAgencia);
+        this.cliente = cliente;
     }
 
     @Override
