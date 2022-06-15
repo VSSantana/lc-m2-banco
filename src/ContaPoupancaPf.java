@@ -12,7 +12,9 @@ public class ContaPoupancaPf extends Conta {
     public String toString() {
         return "ContaPoupancaPf [numeroConta="
                 + super.getNumeroConta().toString() + ", numeroAgencia="
-                + super.getNumeroAgencia().toString() + "]";
+                + super.getNumeroAgencia().toString() + ", dataAbertura=" + super.getDataAbertura() + ", estaAtiva="
+                + super.getEstaAtiva() + ", saldo=" + super.consultarSaldo() + ", dataEncerramento="
+                + super.getDataEncerramento() + "]";
     }
 
 }

@@ -15,7 +15,7 @@ public abstract class Conta implements OperacoesMovimentacacao {
         this.numeroAgencia = numeroAgencia;
         this.dataAbertura = LocalDate.now();
         this.estaAtiva = true;
-        this.saldo = new BigDecimal(0).setScale(2);
+        this.saldo = new BigDecimal(0);
     }
 
     public Integer getNumeroConta() {
@@ -50,7 +50,7 @@ public abstract class Conta implements OperacoesMovimentacacao {
         this.dataEncerramento = dataEncerramento;
     }
 
-    public boolean isEstaAtiva() {
+    public boolean getEstaAtiva() {
         return estaAtiva;
     }
 
@@ -66,21 +66,38 @@ public abstract class Conta implements OperacoesMovimentacacao {
     public void sacar(BigDecimal valorSaque) {
         if (this.saldo.compareTo(valorSaque) != -1
                 && valorSaque.compareTo(new BigDecimal(0)) != -1)
-            this.saldo = this.saldo.subtract(valorSaque).setScale(2);
+            this.saldo = this.saldo.subtract(valorSaque);
     }
 
     @Override
     public void depositar(BigDecimal valorDeposito) {
         if (valorDeposito.compareTo(new BigDecimal(0)) != -1)
-            this.saldo = this.saldo.add(valorDeposito).setScale(2);
+            this.saldo = this.saldo.add(valorDeposito);
     }
 
     @Override
-    public void transferir(Conta contaDestino, BigDecimal valorTransferencia) {
+    public void transferir(Conta contaDestino, BigDecimal valorTransferencia) { // Polimorfismo.
         if (this.saldo.compareTo(valorTransferencia) != -1
                 && valorTransferencia.compareTo(new BigDecimal(0)) != -1) {
-            this.saldo = this.saldo.subtract(valorTransferencia).setScale(2);
-            contaDestino.depositar(valorTransferencia);
+            this.saldo = this.saldo.subtract(valorTransferencia);
+
+            if (contaDestino instanceof ContaInvestimentoPf) {
+                ContaInvestimentoPf ci = (ContaInvestimentoPf) contaDestino;
+                ci.investir(valorTransferencia);
+            }
+
+            else {
+
+                if (contaDestino instanceof ContaInvestimentoPj) {
+                    ContaInvestimentoPj ci = (ContaInvestimentoPj) contaDestino;
+                    ci.investir(valorTransferencia);
+                }
+
+                else {
+                    contaDestino.depositar(valorTransferencia);
+                }
+
+            }
         }
     }
 
