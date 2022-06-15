@@ -10,11 +10,10 @@ public abstract class Conta implements OperacoesMovimentacacao {
     private boolean estaAtiva;
     protected BigDecimal saldo;
 
-    public Conta(Integer numeroConta, Integer numeroAgencia,
-            LocalDate dataAbertura) {
+    public Conta(Integer numeroConta, Integer numeroAgencia) {
         this.numeroConta = numeroConta;
         this.numeroAgencia = numeroAgencia;
-        this.dataAbertura = dataAbertura;
+        this.dataAbertura = LocalDate.now();
         this.estaAtiva = true;
         this.saldo = new BigDecimal(0);
     }
@@ -51,7 +50,7 @@ public abstract class Conta implements OperacoesMovimentacacao {
         this.dataEncerramento = dataEncerramento;
     }
 
-    public boolean isEstaAtiva() {
+    public boolean getEstaAtiva() {
         return estaAtiva;
     }
 
@@ -60,28 +59,45 @@ public abstract class Conta implements OperacoesMovimentacacao {
     }
 
     public BigDecimal consultarSaldo() {
-        return this.saldo;
+        return this.saldo.setScale(2);
     }
 
     @Override
-    public void Sacar(BigDecimal valorSaque) {
+    public void sacar(BigDecimal valorSaque) {
         if (this.saldo.compareTo(valorSaque) != -1
                 && valorSaque.compareTo(new BigDecimal(0)) != -1)
-            this.saldo.subtract(valorSaque);
+            this.saldo = this.saldo.subtract(valorSaque);
     }
 
     @Override
-    public void Depositar(BigDecimal valorDeposito) {
+    public void depositar(BigDecimal valorDeposito) {
         if (valorDeposito.compareTo(new BigDecimal(0)) != -1)
-            this.saldo.add(valorDeposito);
+            this.saldo = this.saldo.add(valorDeposito);
     }
 
     @Override
-    public void Transferir(Conta contaDestino, BigDecimal valorTransferencia) {
+    public void transferir(Conta contaDestino, BigDecimal valorTransferencia) { // Polimorfismo.
         if (this.saldo.compareTo(valorTransferencia) != -1
                 && valorTransferencia.compareTo(new BigDecimal(0)) != -1) {
-            this.saldo.subtract(valorTransferencia);
-            contaDestino.Depositar(valorTransferencia);
+            this.saldo = this.saldo.subtract(valorTransferencia);
+
+            if (contaDestino instanceof ContaInvestimentoPf) {
+                ContaInvestimentoPf ci = (ContaInvestimentoPf) contaDestino;
+                ci.investir(valorTransferencia);
+            }
+
+            else {
+
+                if (contaDestino instanceof ContaInvestimentoPj) {
+                    ContaInvestimentoPj ci = (ContaInvestimentoPj) contaDestino;
+                    ci.investir(valorTransferencia);
+                }
+
+                else {
+                    contaDestino.depositar(valorTransferencia);
+                }
+
+            }
         }
     }
 

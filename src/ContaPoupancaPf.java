@@ -1,10 +1,20 @@
-import java.time.LocalDate;
-
 public class ContaPoupancaPf extends Conta {
 
+    ClientePessoaFisica cliente;
+
     public ContaPoupancaPf(Integer numeroConta, Integer numeroAgencia,
-            LocalDate dataAbertura) {
-        super(numeroConta, numeroAgencia, dataAbertura);
+            ClientePessoaFisica cliente) {
+        super(numeroConta, numeroAgencia);
+        this.cliente = cliente;
+    }
+
+    @Override
+    public String toString() {
+        return "ContaPoupancaPf [numeroConta="
+                + super.getNumeroConta().toString() + ", numeroAgencia="
+                + super.getNumeroAgencia().toString() + ", dataAbertura=" + super.getDataAbertura() + ", estaAtiva="
+                + super.getEstaAtiva() + ", saldo=" + super.consultarSaldo() + ", dataEncerramento="
+                + super.getDataEncerramento() + "]";
     }
 
 }
