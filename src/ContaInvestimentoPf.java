@@ -17,11 +17,19 @@ public class ContaInvestimentoPf extends Conta implements OperacaoInvestimento {
 
     @Override
     public void investir(BigDecimal valorInvestido) {
-        if (super.saldo.compareTo(valorInvestido) != -1
-                && valorInvestido.compareTo(new BigDecimal(0)) != -1) {
-            super.saldo = super.saldo.add(valorInvestido).setScale(2);
+        if (valorInvestido.compareTo(new BigDecimal(0)) != -1) {
+            super.saldo = super.saldo.add(valorInvestido);
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return "ContaInvestimentoPf [numeroConta="
+                + super.getNumeroConta().toString() + ", numeroAgencia="
+                + super.getNumeroAgencia().toString() + ", dataAbertura=" + super.getDataAbertura() + ", estaAtiva="
+                + super.getEstaAtiva() + ", saldo=" + super.consultarSaldo() + ", dataEncerramento="
+                + super.getDataEncerramento() + "]";
     }
 
 }

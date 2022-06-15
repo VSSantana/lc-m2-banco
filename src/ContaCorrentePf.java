@@ -12,7 +12,9 @@ public class ContaCorrentePf extends Conta {
     public String toString() {
         return "ContaCorrentePf [numeroConta="
                 + super.getNumeroConta().toString() + ", numeroAgencia="
-                + super.getNumeroAgencia().toString() + "]";
+                + super.getNumeroAgencia().toString() + ", dataAbertura=" + super.getDataAbertura() + ", estaAtiva="
+                + super.getEstaAtiva() + ", saldo=" + super.consultarSaldo() + ", dataEncerramento="
+                + super.getDataEncerramento() + "]";
     }
 
 }

@@ -1,6 +1,6 @@
 import java.math.BigDecimal;
 
-public class ClientePessoaFisica extends Cliente {
+public class ClientePessoaFisica extends Cliente { // Herança.
 
     private String cpf;
     private BigDecimal renda;

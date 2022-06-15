@@ -28,4 +28,10 @@ public class ClientePessoaJuridica extends Cliente {
         this.faturamentoMensal = faturamentoMensal;
     }
 
+    @Override
+    public String toString() {
+        return "ClientePessoaFisica [nome=" + super.getNome() + ", cnpj=" + cnpj
+                + ", renda=" + faturamentoMensal + "]";
+    }
+
 }
